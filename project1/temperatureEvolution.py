@@ -1,5 +1,13 @@
 """ 
-Description:
+A short segment of code to be implemented within the
+ARES (https://ares.readthedocs.io/en/latest/index.html)
+code to account for interacting dark matter
+
+NOT Completed, project put off until later time as per
+suggestion from Prof. Gluscevic
+
+Author: Karime Maamari
+Date: 10/2019
 
 """
 import os
@@ -16,10 +24,10 @@ from .Constants import c, G, km_per_mpc, m_H, m_He, sigma_SB, g_per_msun, \
 
 ##############################################################################################################################
 
-	# KM: Import relevant constants
+	# Import relevant constants
 		from Constants import m_e, m_H, sigma_T,
 	
-	# KM: Variables:
+	# Variables:
 		"""
 		params:
 			m_e, m_H, sigma_T - imported
@@ -38,10 +46,10 @@ from .Constants import c, G, km_per_mpc, m_H, m_He, sigma_SB, g_per_msun, \
 			return 1/1+z
         self.sigma_0 = 1e-20 # ??
 
-	# KM: DVORKIN EVOLUTIONS:
-		# KM: Dvorkin paper - https://arxiv.org/pdf/1311.2937.pdf
+	# DVORKIN EVOLUTIONS:
+		# Dvorkin paper - https://arxiv.org/pdf/1311.2937.pdf
         
-		# KM: Baryonic temperature evolution
+		# Baryonic temperature evolution
         def dotTb(H, Tb, mu_b, m_x, m_H, Tx, rho_x, rho_b, m_e, Tgamma):
 			# Thermalizations      
         	F_He = 1+0.24*((sigma_He/sigma_0)-1)
@@ -53,7 +61,7 @@ from .Constants import c, G, km_per_mpc, m_H, m_He, sigma_SB, g_per_msun, \
 					((2*mu_b)/(m_x+m_H))*Rprime_x*(Tx-Tb)*(rho_x/rho_b)+\
 					((2*mu_b)/m_e)*R_gamma*(Tgamma-Tb)
        
-		# KM: DM temperature evolution		
+		# DM temperature evolution		
 		def dotTx(H, Tx, m_x, m_H, Tb):
 			# Thermalization
 			F_He = 1+0.24*((sigma_He/sigma_0)-1)
@@ -63,13 +71,13 @@ from .Constants import c, G, km_per_mpc, m_H, m_He, sigma_SB, g_per_msun, \
 			return -2*H*Tx+\
 			((2*m_x)/(m_x+m_H))*Rprime_x*(Tb-Tx)
 
-    # KM: MUNOZ EVOLUTIONS:
-        # KM: Munoz paper - https://arxiv.org/pdf/1708.08923.pdf
-        # KM: For variables - https://arxiv.org/pdf/astro-ph/9506072.pdf
+    # MUNOZ EVOLUTIONS:
+        # Munoz paper - https://arxiv.org/pdf/1708.08923.pdf
+        # For variables - https://arxiv.org/pdf/astro-ph/9506072.pdf
 
-        # KM: Baryonic temperature evolution
+        # Baryonic temperature evolution
         def dotTb(H,Tb,T_gamma,Tx,dotQ_ph):
-			# KM: Thermalizations
+			# Thermalizations
 		   	gamma_c = (8*mu*rho_Gamma*n_e*sigma_T)/(3*m_e*rho_B)  # Compton thermalization
 			gamma_xb = ((rho_x*mu_b*sigma_n)/((m_x+m_b)**2))*(((Tb/m_b)+(Tx/m_x))**((n+1)/2))*\	# Baryonic thermalization
 						((2**((5+n)/2)*gamma(3+(n/2)))/math.sqrt(math.pi))
@@ -80,9 +88,9 @@ from .Constants import c, G, km_per_mpc, m_H, m_He, sigma_SB, g_per_msun, \
                     ((2/3)*gamma_xb*(Tx - Tb)) +\
                     +((2/3)*dotQ_ph)
 
-        # KM: DM temperature evolution
+        # DM temperature evolution
         def dotTx(H,Tx,Tb):
-			# KM: Thermalizations
+			# Thermalizations
 			gamma_xb = # ??
 
            return (-2*H*Tx) +\
